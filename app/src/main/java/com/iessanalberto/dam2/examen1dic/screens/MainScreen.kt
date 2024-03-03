@@ -89,3 +89,135 @@ fun MainScreenBodyContent(modifier: Modifier) {
 }
 
 
+
+/*
+* @Composable
+fun WordleGame() {
+    var targetWord by remember { mutableStateOf("HELLO") }
+    var currentGuess by remember { mutableStateOf("_____") }
+    var remainingAttempts by remember { mutableStateOf(5) }
+    var message by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text("Guess the Word!")
+        Spacer(modifier = Modifier.height(16.dp))
+        Text("Word to guess: $targetWord")
+        Spacer(modifier = Modifier.height(16.dp))
+        Text("Current Guess: $currentGuess")
+        Spacer(modifier = Modifier.height(16.dp))
+        BasicTextField(
+            value = currentGuess,
+            onValueChange = {
+                currentGuess = it.take(targetWord.length)
+            },
+            textStyle = MaterialTheme.typography.h6.copy(color = Color.Black),
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background)
+                .padding(8.dp)
+                .clip(MaterialTheme.shapes.medium)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = {
+            if (currentGuess == targetWord) {
+                message = "Congratulations! You guessed the word."
+            } else {
+                remainingAttempts--
+                if (remainingAttempts == 0) {
+                    message = "Sorry! You ran out of attempts. The correct word was $targetWord."
+                }
+            }
+        }) {
+            Text("Check Guess")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(message)
+    }
+}
+* */
+
+/*
+* enum class Player { X, O, Empty }
+
+@Composable
+fun TicTacToeGame() {
+    var board by remember { mutableStateOf(List(3) { List(3) { Player.Empty } }) }
+    var currentPlayer by remember { mutableStateOf(Player.X) }
+    var winner by remember { mutableStateOf<Player?>(null) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text("Tic Tac Toe", style = MaterialTheme.typography.h5)
+        Spacer(modifier = Modifier.height(16.dp))
+        Grid(board) { row, col ->
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .clickable {
+                        if (board[row][col] == Player.Empty && winner == null) {
+                            board = board.mapIndexed { i, r ->
+                                if (i == row) {
+                                    r.mapIndexed { j, c ->
+                                        if (j == col) currentPlayer else c
+                                    }
+                                } else {
+                                    r
+                                }
+                            }
+                            checkWinner()
+                            currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
+                        }
+                    }
+                    .background(MaterialTheme.colorScheme.primary, shape = RectangleShape)
+                    .padding(4.dp)
+                    .clip(RectangleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                when (board[row][col]) {
+                    Player.X -> Text("X", style = MaterialTheme.typography.h6)
+                    Player.O -> Text("O", style = MaterialTheme.typography.h6)
+                }
+            }
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        if (winner != null) {
+            Text("Player ${winner.name} wins!", style = MaterialTheme.typography.h6)
+        } else {
+            Text("Current Player: ${currentPlayer.name}", style = MaterialTheme.typography.h6)
+        }
+    }
+}
+
+@Composable
+fun Grid(board: List<List<Player>>, onCellClick: (row: Int, col: Int) -> Unit) {
+    for (i in board.indices) {
+        Row {
+            for (j in board[i].indices) {
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .background(MaterialTheme.colorScheme.background, shape = RectangleShape)
+                        .padding(4.dp)
+                        .clip(RectangleShape)
+                        .clickable { onCellClick(i, j) },
+                    contentAlignment = Alignment.Center
+                ) {
+                    when (board[i][j]) {
+                        Player.X -> Text("X", style = MaterialTheme.typography.h6)
+                        Player.O -> Text("O", style = MaterialTheme.typography.h6)
+                    }
+                }
+            }
+        }
+    }
+}
+* */
